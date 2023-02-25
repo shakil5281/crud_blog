@@ -3,7 +3,7 @@ import { Box, IconButton, Paper, Stack, TextField, Typography } from '@mui/mater
 import AirplayTwoToneIcon from '@mui/icons-material/AirplayTwoTone';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { setToken } from '../../../helper/SessonStorage'; 
@@ -12,7 +12,7 @@ import { setToken } from '../../../helper/SessonStorage';
 const UserLogin = () => {
   const [inputs, setInputs] = React.useState({});
   const [loading, setLoading] = React.useState(false);
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const { enqueueSnackbar } = useSnackbar();
 
   const handleChange = (event) => {
@@ -30,7 +30,7 @@ const UserLogin = () => {
       setToken(data.Token)
       enqueueSnackbar('Login success', { variant: 'success' });
       setLoading(false)
-      window.location.href='/'
+      navigate('/admin/summary')
     } catch (err) {
       enqueueSnackbar( err.response.data.Message , { variant: 'error' });
       setLoading(false)

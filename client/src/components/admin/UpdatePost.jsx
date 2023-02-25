@@ -5,6 +5,7 @@ import axios from 'axios'
 import {useNavigate,useParams} from 'react-router-dom'
 import ReadCategory from '../../Hooks/category/ReadCategory'
 import { useSnackbar } from 'notistack';
+import { getToken } from '../../helper/SessonStorage'
 
 
 const UpdatePost = () => {
@@ -46,13 +47,14 @@ const UpdatePost = () => {
 
     const config = {
       headers: {
-        'content-type':'multipart/form-data'
+        'content-type':'multipart/form-data',
+        "token": getToken()
       }
     }
     try{
       await axios.post(`/postupdate/${param.id}`, formdata, config);  
       enqueueSnackbar('post Update success', { variant: 'success' });   
-      navigate('/admin/create')
+      navigate('/admin/posts')
     }catch(err){
       console.log(err)
     }

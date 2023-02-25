@@ -37,6 +37,12 @@ const AdminSideber = () => {
               sx={{ color: '#fff', padding: 2 }} component={Link} to='/admin/category'>
               <ListItemText>Category</ListItemText>
             </MenuItem>
+            <MenuItem
+              selected={selectedIndex === 3}
+              onClick={(event) => handleListItemClick(event, 3)}
+              sx={{ color: '#fff', padding: 2 }} component={Link} to='/admin/category'>
+              <ListItemText>Users</ListItemText>
+            </MenuItem>
           </MenuList>
         </Box>
         <MenuList sx={{ position: 'absolute', display: 'block', width: '100%', top: '90vh', borderTop: '1px solid yellow' }}>

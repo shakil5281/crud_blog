@@ -13,15 +13,15 @@ export default function PostCard({post}) {
                 <Typography sx={{padding: 3}} variant='h5' color= 'primary' >
                     {post._id} -
                     <Box sx={{float: 'right', marginRight: 8}}>
-                        <Button component={Link} to={`/category/${post.category}`} variant='contained'>All Post</Button>
+                        <Button component={Link} to={`/category/${post._id}`} variant='contained'>All Post</Button>
                     </Box>
                 </Typography>
                 <Box sx={{display: 'flex', flexWrap: 'wrap'}}>
                     {
                         
                         post.products.slice(0, 4).map((item, i) => (
-                            <Card key={i.toString()} sx={{ maxWidth: 345, marginLeft: 4, marginTop: 4 }}>
-                                 <Link to={'/'}>
+                            <Card key={i.toString()} sx={{ maxWidth: 230, marginLeft: 4, marginTop: 4 }}>
+                                 <Link to={`/singlepost/${item._id}`}>
                                 <CardActionArea>
                                     <CardMedia
                                         component="img"
@@ -33,7 +33,7 @@ export default function PostCard({post}) {
                                         <Typography gutterBottom variant="h5" component="div">
                                             {item.title}
                                         </Typography>
-                                        <Typography variant="body2" color="text.secondary">
+                                        <Typography sx={{height: '60px', overflow: 'hidden'}} variant="body2" color="text.secondary">
                                             {item.description}
                                         </Typography>
                                     </CardContent>

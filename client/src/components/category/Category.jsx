@@ -5,6 +5,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import ReadCategory from '../../Hooks/category/ReadCategory';
 import { useSnackbar } from 'notistack';
 import axios from 'axios';
+import { getToken } from '../../helper/SessonStorage';
+
+
+const AxiosHeader = { headers: { "token": getToken() } }
 
 const Category = () => {
 
@@ -16,9 +20,9 @@ const Category = () => {
 
 const CategoryInput = async() =>{
     try{
-        await axios.post('/createcategory',inputCategory)
+        await axios.post('/createcategory',inputCategory, AxiosHeader)
         enqueueSnackbar('Create category success', { variant : 'success' });
-        navigate('/createCategory')
+        navigate('/admin/createcategory')
 
     }catch(err){
         console.log(err)
@@ -73,7 +77,7 @@ const categorySubmit = (e) =>{
                                             </TableCell>
                                             <TableCell align='center'>
                                                 <Box>
-                                                    <Button color='secondary' sx={{ marginLeft: 2 }} variant='text' LinkComponent={Link} to={`/deletecategory/${category._id}`} endIcon={<DeleteRoundedIcon />} size='small' >Delete</Button>
+                                                    <Button color='secondary' sx={{ marginLeft: 2 }} variant='text' LinkComponent={Link} to={`/admin/deletecategory/${category._id}`} endIcon={<DeleteRoundedIcon />} size='small' >Delete</Button>
                                                 </Box>
                                             </TableCell>
                                         </TableRow>

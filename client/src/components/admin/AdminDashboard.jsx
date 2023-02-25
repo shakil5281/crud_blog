@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box,  Paper,  Typography } from '@mui/material'
+import { Box, Paper, Typography } from '@mui/material'
 import Summary from '../../Hooks/Summary'
 
 
@@ -12,14 +12,16 @@ const AdminDashboard = () => {
         <Typography color='primary' variant='h4'>
           Admin Dashboard
         </Typography>
-        <Box sx={{marginTop: 10, display: 'flex'}} component={'div'}>
+        <Box sx={{ marginTop: 10, display: 'flex' }} component={'div'}>
           {
-            [1].map((item, i)=>(
-              <Paper key={i.toString()}  sx={{padding: 2, backgroundColor: '#d321d3', color: 'white', width: 300, margin: 4}} elevation={0}>
-              <Typography sx={{display: 'flex', justifyContent: 'center'}} variant='h6'>Total Post</Typography>
-              <Typography sx={{display: 'flex', justifyContent: 'center'}} variant='h5'>{summary}</Typography>
-            </Paper>
-            ))  
+            Array.from(summary).map((item, i) => (
+              <Box key={i.toString()} component={'div'} sx={{ padding: 2, boxShadow: '2px 12px 15px 0px #46464612', margin: 2, background: 'white', width: { xs: '100%', lg: '20%' }, borderRadius: '10px' }}>
+                <Typography sx={{ color: 'gray', textAlign: 'center', marginTop: 1, fontWeight: '600' }} variant='body2'>Total {item._id}</Typography>
+                <Typography sx={{ color: 'gray', textAlign: 'center', marginTop: 1, fontWeight: '600', fontSize: '2.3rem' }} variant='h4'>
+                  {item.sum}
+                </Typography>
+              </Box>
+            ))
           }
         </Box>
       </Box>

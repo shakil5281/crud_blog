@@ -22,7 +22,7 @@ router.post('/subuserlogin', SubUserController.SubUserLogin)
 
 
 router.get('/summary', AuthVerify, Summary)
-router.get('/allcategorypost', AuthVerify, Allcategorypost)
+
 router.post('/create',upload.single('photo'),AuthVerify, CreatePost)
 router.get('/categorypost/:category',AuthVerify, CategoryPost)
 router.post('/postupdate/:id',upload.single('photo'),AuthVerify, PostUpdate)
@@ -34,8 +34,9 @@ router.get('/userpost', AuthVerify, UserPost)
 
 
 
-router.get('/singlepostSearch/:id', SinglePostSearch)
 router.get('/allposts', GetAllPosts)
+router.get('/singlepostSearch/:id', SinglePostSearch)
+router.get('/allcategorypost', Allcategorypost)
 
 
 

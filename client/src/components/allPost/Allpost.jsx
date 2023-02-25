@@ -22,7 +22,7 @@ const AllPost = () => {
       {
         post.map((post)=>(
           <Paper key={post._id} sx={{ padding: 2, display: 'flex', marginTop: 2, boxShadow: 'none' }}>
-          <ImageList sx={{ width: 400, height: 170 }}>
+          <ImageList sx={{ width: 400, height: 170, overflow: 'hidden' }}>
             <ImageListItem>
               <img
                 src={`/uploads/${post.photo}`}

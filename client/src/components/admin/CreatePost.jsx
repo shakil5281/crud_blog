@@ -5,9 +5,13 @@ import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import ReadCategory from '../../Hooks/category/ReadCategory'
 import { useSnackbar } from 'notistack';
+import { getToken } from '../../helper/SessonStorage'
 
 
-const CreatePost = () => {
+const AxiosHeader = { headers: { "token": getToken() } }
+
+
+const CreateNewPost = () => {
 
   const navigate = useNavigate()
   const Category = ReadCategory()
@@ -44,13 +48,14 @@ const CreatePost = () => {
 
     const config = {
       headers: {
-        'content-type':'multipart/form-data'
+        'content-type':'multipart/form-data',
+        "token": getToken()
       }
     }
     try{
-      await axios.post('/create', formdata, config);     
+      await axios.post('/create', formdata, config, AxiosHeader);     
       enqueueSnackbar('New post create success', { variant });
-        navigate('/admin/create')
+        navigate('/admin/posts')
     }catch(err){
       enqueueSnackbar(err.response.data.error, { variant:'error' });
     }
@@ -124,4 +129,4 @@ const CreatePost = () => {
   )
 }
 
-export default CreatePost
+export default CreateNewPost
