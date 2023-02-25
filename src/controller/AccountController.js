@@ -9,19 +9,24 @@ exports.AccountVerify= async(req, res) =>{
     let email = req.params.email;
     let OTPCode = Math.floor(100000 + Math.random() * 900000)
     try{
-      const user =   await User.aggregate([
-            {
-                $count: 'email'
-            }
-        ])
-        if(user.length < 1){
-            await OTPModel.create({email: email, otp: OTPCode})
-            // Email Send
-            let SendEmail = await SentEmailutility(email,"Your PIN Code is= "+OTPCode,"Task Manager PIN Verification")
-            res.status(200).json({status: "success", data: SendEmail})
+        if(!email){
+            res.status(422).json({message: "Email is required"})
         }else{
-            res.status(404).json({error: "User Request Failed"})
+            const user =   await User.aggregate([
+                  {
+                      $count: 'email'
+                  }
+              ])
+              if(user.length < 1){
+                  await OTPModel.create({email: email, otp: OTPCode})
+                  // Email Send
+                  let SendEmail = await SentEmailutility(email,"Your PIN Code is= "+OTPCode,"New account OTP verification")
+                  res.status(200).json({status: "success", data: SendEmail})
+              }else{
+                  res.status(404).json({error: "User Request Failed"})
+              }
         }
+
     }catch(err){
         console.log(err);
     }

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const AuthVerify = require('../meddleware/AuthVerify')
-const {CreatePost, GetAllPosts,PostUpdate,SinglePostDelete,CategoryPost,MultiPostDelete, SinglePostSearch, PostCount,  UserPost} = require('../controller/postController')
+const {CreatePost, GetAllPosts,PostUpdate,Allcategorypost, SinglePostDelete,CategoryPost,MultiPostDelete, SinglePostSearch, PostCount,  UserPost, Summary} = require('../controller/postController')
 const {CreateCategory, GetAllCategories, UpdateCategory, DeleteCategory} = require('../controller/categoryController')
 const upload = require('../meddleware/uploadphoto')
 const UserController = require('../controller/AccountController')
@@ -21,7 +21,8 @@ router.post('/subuserlogin', SubUserController.SubUserLogin)
 
 
 
-
+router.get('/summary', AuthVerify, Summary)
+router.get('/allcategorypost', AuthVerify, Allcategorypost)
 router.post('/create',upload.single('photo'),AuthVerify, CreatePost)
 router.get('/categorypost/:category',AuthVerify, CategoryPost)
 router.post('/postupdate/:id',upload.single('photo'),AuthVerify, PostUpdate)

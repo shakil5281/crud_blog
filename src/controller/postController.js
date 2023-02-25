@@ -1,6 +1,76 @@
 const Post = require('../model/post')
 const User = require('../model/User')
 
+
+
+const Summary = async (req, res) => {
+    try {
+        const email = req.email
+        const data = await Post.aggregate([
+            {
+                $group:{_id:"$category",sum:{$count: {}}}
+            }
+        ])
+        res.status(200).json({ summary: data })
+
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ message: err.message })
+    }
+}
+
+
+const Allcategorypost = async (req, res) => {
+    try {
+        const email = req.email
+        const data = await Post.aggregate([
+            { $group: {
+                _id: "$category",
+                products: { $push: "$$ROOT"},
+                
+              }}
+              
+        ])
+
+        // const data = await Post.aggregate([
+        //     {
+        //       $facet: {
+        //         groups: [
+        //           { $group: {
+        //             _id: "$category",
+        //             posts: { $push: "$$ROOT" },
+        //             count: { $sum: 1 }
+        //           }},
+        //           { $sort: { count: -1 } },
+        //           { $limit: 4 }
+        //         ],
+        //         totalCount: [
+        //           { $count: "total" }
+        //         ]
+        //       }
+        //     },
+        //     {
+        //       $project: {
+        //         groups: 1,
+        //         totalCount: { $arrayElemAt: ["$totalCount.total", 0] }
+        //       }
+        //     }
+        //   ])
+        res.status(200).json({ summary: data })
+
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ message: err.message })
+    }
+}
+
+
+
+
+
+
+
+
 const CreatePost = async(req, res) =>{
     try{
         const {title,description,category} = req.body 
@@ -28,6 +98,7 @@ const CreatePost = async(req, res) =>{
         
     }catch(err){
         console.log(err)
+        res.status(500).json({error: err.message})
     }
 }
 
@@ -185,4 +256,4 @@ const PostCount = async(req, res) =>{
 }
 
 
-module.exports = {CreatePost, GetAllPosts, PostUpdate,SinglePostDelete, CategoryPost, MultiPostDelete, SinglePostSearch, PostCount, UserPost}
+module.exports = {CreatePost, GetAllPosts,Allcategorypost, PostUpdate,SinglePostDelete, CategoryPost, MultiPostDelete, SinglePostSearch, PostCount, UserPost, Summary}

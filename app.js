@@ -37,10 +37,10 @@ app.use(router)
 
 app.use("/uploads", express.static("./uploads"))
 
-// app.use(express.static('client/build'))
-// app.use("*",(req,res)=>{
-//    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-// })
+app.use(express.static('client/build'))
+app.use("*",(req,res)=>{
+   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+})
 
 
 // Undefined Route Implement
