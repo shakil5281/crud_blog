@@ -1,0 +1,661 @@
+{
+	"info": {
+		"_postman_id": "a7de18e7-5d46-450f-b274-748fda43532b",
+		"name": "CrudBlog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20859953"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": \"Phone\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/createcategory",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"createcategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/allcategories",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"allcategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": \"Phone\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/updatecategory/63e47f3d3629998b9f2c65c7",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"updatecategory",
+								"63e47f3d3629998b9f2c65c7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/deletecategory/63e50e833a9db1c8c8bb8b52",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"deletecategory",
+								"63e50e833a9db1c8c8bb8b52"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blog Post",
+			"item": [
+				{
+					"name": "crud",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2ZjMzhiYzljNWQ2MDIwNjZhZWEyYmMiLCJlbWFpbCI6InJhYmJpbDE1ODlAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiUmFiYmlsIiwibGFzdE5hbWUiOiJIYXNhbiIsImlhdCI6MTY3NzQ3NDAwNn0.F8j77vvBUMiOSmjYZPCvfhjC7EOUXkT-LlLHK_7BjOk",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "What Are Free Weights?",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Free weights are a piece of equipment used for exercise. It is not attached to machines that allow for a wide range of motion and muscle engagement. It can be used without any linear, dedicated movement restrictions. Instead of lifting heavy weights, these tools are great for training stability and form.\n\nSince they are not attached to any machine, they should be used with considerable caution. It is a common tool for those who are regularly lifting heavier than normal weights without any restrictions. You can use it anywhere you don’t need to go to the gym. That means it is a great tool for those who want to do regular workouts at home. ",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "Gym",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/SHAKIL HOSSEN/Downloads/kari-shea-1SAnrIxw5OY-unsplash.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/create",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"create"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AllPost",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2Y2ZWRjOTliYTRjOWI5MjNmYTNhMTQiLCJlbWFpbCI6InNoYWtpbGhvc3NlbjMwN0BnbWFpbC5jb20iLCJpYXQiOjE2NzcxMjc4MDl9.9HDY-BxdnkQQTHoxjn3y3aq-UbWJrokSgluTNKRwN5o",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/allposts",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"allposts"
+									],
+									"query": [
+										{
+											"key": "Token",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Data",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2Y2ZWRjOTliYTRjOWI5MjNmYTNhMTQiLCJlbWFpbCI6InNoYWtpbGhvc3NlbjMwN0BnbWFpbC5jb20iLCJpYXQiOjE2NzcxMjc4MDl9.9HDY-BxdnkQQTHoxjn3y3aq-UbWJrokSgluTNKRwN5o",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/SHAKIL HOSSEN/Downloads/kari-shea-1SAnrIxw5OY-unsplash.jpg"
+										},
+										{
+											"key": "title",
+											"value": "Hello",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Hello There",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/postupdate/63fc399e9c5d602066aea2cc",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"postupdate",
+										"63fc399e9c5d602066aea2cc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete One  post",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2Y2ZWRjOTliYTRjOWI5MjNmYTNhMTQiLCJlbWFpbCI6InNoYWtpbGhvc3NlbjMwN0BnbWFpbC5jb20iLCJpYXQiOjE2NzcxMjc4MDl9.9HDY-BxdnkQQTHoxjn3y3aq-UbWJrokSgluTNKRwN5o",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{BaseUrl}}/singlepostdelete/63fc399e9c5d602066aea2cc",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"singlepostdelete",
+										"63fc399e9c5d602066aea2cc"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Category Post",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2Y2ZWRjOTliYTRjOWI5MjNmYTNhMTQiLCJlbWFpbCI6InNoYWtpbGhvc3NlbjMwN0BnbWFpbC5jb20iLCJpYXQiOjE2NzcxMjc4MDl9.9HDY-BxdnkQQTHoxjn3y3aq-UbWJrokSgluTNKRwN5o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseUrl}}/categorypost/Gym",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"categorypost",
+								"Gym"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Multi post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2Y2ZWRjOTliYTRjOWI5MjNmYTNhMTQiLCJlbWFpbCI6InNoYWtpbGhvc3NlbjMwN0BnbWFpbC5jb20iLCJpYXQiOjE2NzcxMjc4MDl9.9HDY-BxdnkQQTHoxjn3y3aq-UbWJrokSgluTNKRwN5o",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idsToDelete\": [\r\n        { \"$oid\": \"63fc404933ae2bf7af9c3d64\" },\r\n        { \"$oid\": \"615e9326c356f6e25f18de0b\" },\r\n        { \"$oid\": \"615e9326c356f6e25f18de0b\" },\r\n        { \"$oid\": \"615e9326c356f6e25f18de0b\" }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/multipostdelete",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"multipostdelete"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SinglePostSearch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/singlepostSearch/63e26cf8faca3a3a47d9ed9a",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"singlepostSearch",
+								"63e26cf8faca3a3a47d9ed9a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Post",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2Y2ZjdhYTJiNDAxM2QxNTkzNThhZGUiLCJlbWFpbCI6InNoYWtpbGhvc3NlbjMwN0BnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJzaGFraWwiLCJsYXN0TmFtZSI6Imhvc3NlbiIsImlhdCI6MTY3NzE0MjY1MX0.bq2VohcEQb8i1ARRhTSumbIINyn1laDMnEL_Gf1jPRk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseUrl}}/userpost",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"userpost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Summary",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "All category post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/allcategorypost",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"allcategorypost"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Account Update",
+					"item": [
+						{
+							"name": "User Account Update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2ZjMmUyMTY3ZDQwMmUwMzU4ZmFkYmEiLCJlbWFpbCI6InJhYmJpbDE1ODlAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiUmFiYmlsIiwibGFzdE5hbWUiOiJIYXNhbiIsImlhdCI6MTY3NzQ3MjYzMn0.eUD27xO-XkDddej7eQ87lM76DOxMPMUrnPjMqNHhxxE",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Rayhan\",\r\n    \"lastName\": \"Hossen\",\r\n    \"phone\": \"0152842565\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseUrl}}/userupdate",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"userupdate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User Details",
+					"item": [
+						{
+							"name": "User Informatin",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2ZjMzhiYzljNWQ2MDIwNjZhZWEyYmMiLCJlbWFpbCI6InJhYmJpbDE1ODlAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiUmFiYmlsIiwibGFzdE5hbWUiOiJIYXNhbiIsImlhdCI6MTY3NzQ3NDAwNn0.F8j77vvBUMiOSmjYZPCvfhjC7EOUXkT-LlLHK_7BjOk",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{BaseUrl}}/user",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Account Delete",
+					"item": [
+						{
+							"name": "User Accout Delete",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2ZjMzhiYzljNWQ2MDIwNjZhZWEyYmMiLCJlbWFpbCI6InJhYmJpbDE1ODlAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiUmFiYmlsIiwibGFzdE5hbWUiOiJIYXNhbiIsImlhdCI6MTY3NzQ3NDAwNn0.F8j77vvBUMiOSmjYZPCvfhjC7EOUXkT-LlLHK_7BjOk",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{BaseUrl}}/userdelete",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"userdelete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Account verificaiton",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/accountverification/shakilhossen307@gmail.com",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"accountverification",
+								"shakilhossen307@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OTP Verify",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/otpverification/shakilhossen307@gmail.com/117511",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"otpverification",
+								"shakilhossen307@gmail.com",
+								"117511"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"shakil\",\r\n    \"lastName\": \"hossen\",\r\n    \"email\": \"shakilhossen308@gmail.com\",\r\n    \"otp\": \"117511\",\r\n    \"password\": \"1452\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/createaccount",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"createaccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Sub Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2ZjMmRiYjY3ZDQwMmUwMzU4ZmFkYTQiLCJlbWFpbCI6InNoYWtpbGhvc3NlbjMwN0BnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJzaGFraWwiLCJsYXN0TmFtZSI6Imhvc3NlbiIsImlhdCI6MTY3NzQ3Mzk1Mn0.F2iBx6cpfhUE85-QaXe2rJGoPNC9VQc-OyIDH4zJ31k",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Rabbil\",\r\n    \"lastName\": \"Hasan\",\r\n    \"email\": \"rabbil1589@gmail.com\",\r\n    \"password\": \"147\",\r\n    \"admin\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/createsubaccount",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"createsubaccount"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"rabbil1589@gmail.com\",\r\n    \"password\": \"147\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/login",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "http://localhost:5000",
+			"type": "string"
+		}
+	]
+}

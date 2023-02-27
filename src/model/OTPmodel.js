@@ -13,7 +13,8 @@ const OTPSchema = mongoose.Schema({
     },
     createdDate: {
         type: Date,
-        default: Date.now()
+        default: Date.now(),
+        expires: 300
     }
 }, { versionKey: false });
 const OTPModel = mongoose.model('otps', OTPSchema);

@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         requried: true,
         trim: true,
+        enum: ["superadmin","admin","user"],
         default: 'superadmin',
      },
     photo: {

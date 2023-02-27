@@ -1,6 +1,6 @@
 const Post = require('../model/post')
 const User = require('../model/User')
-
+const ObjectId = require('mongodb').ObjectId;
 
 
 const Summary = async (req, res) => {
@@ -8,7 +8,7 @@ const Summary = async (req, res) => {
         const email = req.email
         const data = await Post.aggregate([
             {
-                $group:{_id:"$category",sum:{$count: {}}}
+                $group: { _id: "$category", sum: { $count: {} } }
             }
         ])
         res.status(200).json({ summary: data })
@@ -24,12 +24,14 @@ const Allcategorypost = async (req, res) => {
     try {
         const email = req.email
         const data = await Post.aggregate([
-            { $group: {
-                _id: "$category",
-                products: { $push: "$$ROOT"},
-                
-              }}
-              
+            {
+                $group: {
+                    _id: "$category",
+                    products: { $push: "$$ROOT" },
+
+                }
+            }
+
         ])
 
         // const data = await Post.aggregate([
@@ -65,24 +67,18 @@ const Allcategorypost = async (req, res) => {
 }
 
 
-
-
-
-
-
-
-const CreatePost = async(req, res) =>{
-    try{
-        const {title,description,category} = req.body 
+const CreatePost = async (req, res) => {
+    try {
+        const { title, description, category } = req.body
         const photo = ("file : ", req.file)
 
-        if(!title){
-            res.status(400).json({error: 'Title is required'})
-        }else if(!description){
-            res.status(400).json({error: 'Description is required'})
-        }else if(!photo){
-            res.status(400).json({error: 'photo is required'})
-        }else{
+        if (!title) {
+            res.status(400).json({ error: 'Title is required' })
+        } else if (!description) {
+            res.status(400).json({ error: 'Description is required' })
+        } else if (!photo) {
+            res.status(400).json({ error: 'photo is required' })
+        } else {
             const newPost = new Post({
                 title,
                 description,
@@ -95,36 +91,39 @@ const CreatePost = async(req, res) =>{
             const post = await newPost.save()
             return res.json(post)
         }
-        
-    }catch(err){
+
+    } catch (err) {
         console.log(err)
-        res.status(500).json({error: err.message})
+        res.status(500).json({ error: err.message })
     }
 }
 
-const GetAllPosts = async(req, res) =>{
-    try{
-       const user =  await User.aggregate([
+
+const GetAllPosts = async (req, res) => {
+    try {
+        const user = await User.aggregate([
             {
                 $count: 'email'
             }
         ])
-        if(user.length < 1){
-            res.status(404).json({error: 'User not found'})
-        }else{
-        const posts = await Post.find()
-        res.status(200).json(posts)
+        if (user.length < 1) {
+            res.status(404).json({ error: 'User not found' })
+        } else {
+            const posts = await Post.find()
+            res.status(200).json(posts)
         }
 
 
-    }catch(err){
+    } catch (err) {
         console.log(err)
-        res.status(500).json({error: err.message})
+        res.status(500).json({ error: err.message })
     }
 }
 
-const UserPost = async(req, res) =>{
-    try{
+
+
+const UserPost = async (req, res) => {
+    try {
         const user = await User.aggregate([
             {
                 $match: {
@@ -136,13 +135,13 @@ const UserPost = async(req, res) =>{
                 $count: "total"
             }
         ])
-        
-        if(user.length === 1){
+
+        if (user.length === 1) {
             console.log(user[0].total)
             const posts = await Post.find()
             res.status(200).json(posts)
-        }else{
-          const data =   await Post.aggregate([
+        } else {
+            const data = await Post.aggregate([
                 {
                     $match: {
                         email: req.email
@@ -152,108 +151,120 @@ const UserPost = async(req, res) =>{
             res.status(200).json(data)
         }
 
-       
-    }catch(err){
+    } catch (err) {
         console.log(err)
-        res.status(500).json({error: err.message})
+        res.status(500).json({ error: err.message })
     }
 }
 
 
 
 
-
-
-
-
-
-
-const CategoryPost = async(req, res) =>{
-    try{
+const CategoryPost = async (req, res) => {
+    try {
         const posts = await Post.aggregate([
             {
-                $match: {category: req.params.category}
+                $match: { category: req.params.category }
             }
         ])
         return res.json(posts)
 
-    }catch(err){
+    } catch (err) {
         console.log(err)
-        return res.status(500).json({error: err.message})
+        return res.status(500).json({ error: err.message })
     }
 }
 
 
 
-const PostUpdate = async(req, res) =>{
-    try{
-        const {id} = req.params
-        const {title,description,category} = req.body 
+
+const PostUpdate = async (req, res) => {
+    try {
+        const { id } = req.params
+        const { title, description, category } = req.body
         const photo = ("file : ", req.file)
-        if(!photo){
-            res.status(400).json({error: 'photo is required'})
-        }else{
-            const date = await Post.updateOne({_id: id}, {$set:{title,description,photo: photo.filename, category}})
-            return res.json(date)
+        if (!photo) {
+            res.status(400).json({ error: 'photo is required' })
+        } else {
+            const userpost = await Post.findById({ _id: id })
+            if (!userpost) {
+                res.status(404).json({ error: 'post not found' })
+            } else {
+                await Post.updateOne({ _id: id }, { $set: { title, description, photo: photo.filename, category } })
+                res.status(200).json({ status: "success" })
+
+            }
+        }
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json({ error: err.message })
+    }
+}
+
+
+const SinglePostDelete = async (req, res) => {
+    try {
+        const { id } = req.params
+
+        const userpost = await Post.findById({ _id: id })
+        if (!userpost) {
+            res.status(404).json({ error: 'post not found' })
+        } else {
+            const date = await Post.deleteOne({ _id: id })
+            res.status(200).json({ status: "success" })
         }
 
-
-    }catch(err){
+    } catch (err) {
         console.log(err)
-        return res.status(500).json({error: err.message})
-    }
-}
-const SinglePostDelete = async(req, res) =>{
-    try{
-        const {id} = req.params
-        const date = await Post.deleteOne({_id: id})
-        return res.json(date)
-
-
-    }catch(err){
-        console.log(err)
-        return res.status(500).json({error: err.message})
-    }
-}
-const MultiPostDelete = async(req, res) =>{
-    try{
-        const {id} = req.body
-        const date = await Post.deleteOne({_id: id})
-        return res.json(date)
-
-
-    }catch(err){
-        console.log(err)
-        return res.status(500).json({error: err.message})
+        return res.status(500).json({ error: err.message })
     }
 }
 
 
-const SinglePostSearch = async(req, res) =>{
-    try{
-        const {id} = req.params
-        const post = await Post.findOne({_id: id})
+
+const MultiPostDelete = async (req, res) => {
+    try {
+        const idsToDelete = req.body.idsToDelete.map(id => ObjectId(id.$oid));
+        console.log(idsToDelete)
+        const filter = { _id: { $in: idsToDelete } };
+        const result = await Post.deleteMany(filter);
+        res.json({ deletedCount: result.deletedCount });
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json({ error: err.message })
+    }
+}
+
+
+
+
+const SinglePostSearch = async (req, res) => {
+    try {
+        const { id } = req.params
+        const post = await Post.findOne({ _id: id })
         return res.json(post)
-    }catch(err){
+    } catch (err) {
         console.log(err)
-        return res.status(500).json({error: err.message})
+        return res.status(500).json({ error: err.message })
     }
 }
 
-const PostCount = async(req, res) =>{
-    try{
-        const post  = await Post.aggregate([
-              {
+
+
+const PostCount = async (req, res) => {
+    try {
+        const post = await Post.aggregate([
+            {
                 $count: 'title'
-              }
+            }
         ])
         return res.json(post)
 
-    }catch(err){
+    } catch (err) {
         console.log(err)
-        return res.status(500).json({error: err.message})
+        return res.status(500).json({ error: err.message })
     }
 }
 
 
-module.exports = {CreatePost, GetAllPosts,Allcategorypost, PostUpdate,SinglePostDelete, CategoryPost, MultiPostDelete, SinglePostSearch, PostCount, UserPost, Summary}
+module.exports = { CreatePost, GetAllPosts, Allcategorypost, PostUpdate, SinglePostDelete, CategoryPost, MultiPostDelete, SinglePostSearch, PostCount, UserPost, Summary }

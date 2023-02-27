@@ -21,6 +21,7 @@ const PostSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
+        trim: true,
         default: 'General'
     },
     photo: {

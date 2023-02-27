@@ -17,7 +17,7 @@ router.post('/login', UserController.login)
 
 
 router.post('/createsubaccount',AuthVerify, SubUserController.CreateSubUserAccount)
-router.post('/subuserlogin', SubUserController.SubUserLogin)
+
 
 
 
@@ -30,6 +30,11 @@ router.get('/singlepostdelete/:id',AuthVerify, SinglePostDelete)
 router.get('/multipostdelete',AuthVerify, MultiPostDelete)
 router.get('/postCount',AuthVerify,PostCount)
 router.get('/userpost', AuthVerify, UserPost)
+
+router.get('/user', AuthVerify, UserController.AccountRead)
+router.post('/userupdate', AuthVerify, UserController.AccountUpdate)
+router.post('/userdelete', AuthVerify, UserController.AccountDelete)
+
 
 
 
